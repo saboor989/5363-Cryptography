@@ -16,8 +16,44 @@ key=key.upper()
 b=0
 while (b<len(key)):
     if(ord(key[b])>=65 and ord(key[b])<=90):
-        #print("no spaces"+key[b])
+        print("no spaces"+key[b])
     b=b+1
+
+
+
+msg=input("enter the msg ")
+
+
+le=len(msg)
+msg=msg.upper()
+xmsg=''
+j=0
+i=0
+c=0
+m=0
+while(i<le):
+    c=0
+    #print("the j value")
+    if(i==0):
+        xmsg=xmsg+msg[0]
+        i=i+1
+    if(i<len(msg)):
+        if(ord(xmsg[j])==ord(msg[i])):
+            xmsg=xmsg+'x'
+            xmsg=xmsg+msg[i]
+            j=j+2
+            #print("The xmsg same :",xmsg)
+        else:
+            xmsg=xmsg+msg[i]
+            j=j+1
+            #print("the msg no same:",xmsg)
+    else:
+        m=0
+    i=i+1
+print("the unique is ")
+print(xmsg)
+
+
 
 
 i=0
@@ -142,7 +178,7 @@ b=0
 while (b<len(encryptmsg)):
     #print("\n")
     if(ord(encryptmsg[b])>=65 and ord(encryptmsg[b])<=90):
-        #print("no spaces"+encryptmsg[b])
+        print("no spaces"+encryptmsg[b])
     b=b+1
 
 
@@ -252,20 +288,20 @@ while(g<len(dmsg)):
         #print(p2)
         #print(q2)
     if(q1==q2):
-        if(p1==4):
+        if(p1==0):
             emsg=emsg+Matrix[4][q1]
         else:
             emsg=emsg+Matrix[p1-1][q1]
-        if(p2==4):
+        if(p2==0):
             emsg=emsg+Matrix[4][q2]
         else:
             emsg=emsg+Matrix[p2-1][q2]
     elif(p1==p2):
-        if(q1==4):
+        if(q1==0):
             emsg=emsg+Matrix[p1][4]
         else:
             emsg=emsg+Matrix[p1][q1-1]
-        if(q2==4):
+        if(q2==0):
             emsg=emsg+Matrix[q2][4]
         else:
             emsg=emsg+Matrix[p2][q2-1]
@@ -280,7 +316,10 @@ while(g<len(dmsg)):
 
 emsg=''
 
-
+count = 0
+for line in Matrix:
+    print(count,line)
+    count += 1
 
 
 
