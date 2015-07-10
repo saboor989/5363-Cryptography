@@ -1,220 +1,199 @@
+import sys
 
+def alphabet():
+    #alpha= "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    #Entering the alphabets in string.
+    alpha= ""
+    #Generate the alphabet
+    for i in range(0,26):
+        alpha = alpha + chr(i+65)
+    return alpha
 
+def Remove_dup_specialchar(key):
+    #Removing numbers or special characters from key
+    key1=''
+    key=key.upper()
+    b=0
+    while (b<len(key)):
+        if(ord(key[b])>=65 and ord(key[b])<=90):
+            key1=key1+key[b]
+        b=b+1
 
-print( "Playfair Cipher")
-print("Enter \n 1 for encrypt\n 2 for decrypt:")
-x = input()
-
-
-alpha= "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-key=input("please enter the secret key for decoding: ")
-key1=''
-l=len(key)
-
-key=key.upper()
-b=0
-while (b<len(key)):
-    if(ord(key[b])>=65 and ord(key[b])<=90):
-        print("no spaces"+key[b])
-    b=b+1
-
-
-
-msg=input("enter the msg ")
-
-
-le=len(msg)
-msg=msg.upper()
-xmsg=''
-j=0
-i=0
-c=0
-m=0
-while(i<le):
+    #now key is in key1
+    #removing duplicates from the key:
+    le=len(key1)    
+    uniq=''
+    j=0
     c=0
-    #print("the j value")
-    if(i==0):
-        xmsg=xmsg+msg[0]
-        i=i+1
-    if(i<len(msg)):
-        if(ord(xmsg[j])==ord(msg[i])):
-            xmsg=xmsg+'x'
-            xmsg=xmsg+msg[i]
-            j=j+2
-            #print("The xmsg same :",xmsg)
-        else:
-            xmsg=xmsg+msg[i]
-            j=j+1
-            #print("the msg no same:",xmsg)
-    else:
-        m=0
-    i=i+1
-print("the unique is ")
-print(xmsg)
-
-
-
-
-i=0
-#removing spaces:
-while(i<l):
-    if(ord(key[i])!=32):
-        key1=key1+key[i]
-       # print("hello")
-    i=i+1
-print(key1)
-
-#removing duplicates:
-
-le=len(key1)    
-uniq=''
-j=0
-c=0
-m=0
-while(j<le):
-    c=0
-    #print("the j value")
-    if(j==0):
-        uniq=uniq+key1[0]
-    k=0
-    leng=len(uniq)
-    while(k<leng):
-        if(ord(key1[j])==ord(uniq[k])):
-            c=1
-        k=k+1
-    if(c==1):
-        m=1
-    else:
-        uniq=uniq+key1[j]
-    j=j+1
-print("the unique is ")
-print(uniq)
-
-
-
-
-
-#inserting into matrix
-Matrix = [[0 for x in range(5)] for x in range(5)] 
-#You can now add items to the list:
-
-lenn=len(uniq)
-
-x=0
-i=0
-j=0
-while(x<lenn):
-    Matrix[i][j]=uniq[x]
-    print("the matrix have")
-    print(i)
-    print(j)
-    print(Matrix[i][j])
-    x=x+1
-    j=j+1
-    if(j==5):
-        i=i+1
-        j=0
-print("the i value \n i")
-print(i)
-print("j value")
-print(j)
-ik=i
-ij=j
-    
-
-y=0
-print("the lenn")
-print(lenn)
-uniq=uniq.upper()
-while(y<26):
-    c=0
-    z=0
-    
-    while(z<lenn):
-        #print("the ord of alpha and uniq ")
-        #print(ord(alpha[y]))
-        #print(alpha[y])
-        #print(ord(uniq[z]))
-        #print(uniq[z])
-        if(ord(alpha[y])==ord(uniq[z])):
-            c=1
-            #print("the c value is ::::::::")
-            #print(c)
-            #print("the above is c value")
-        z=z+1
-    #print("the z value")
-    #print(z)
-    if(c==1):
-        m=1
-    else:
-        if(ord(alpha[y])!=74):
-            Matrix[i][j]=alpha[y]
-            #print("the matrix")
-            #print(i)
-            #print(j)
-            print(Matrix[i][j])
-            j=j+1
-            if(j==5):
-                i=i+1
-                j=0
-                print("\n")
-    y=y+1
-    
-
-#print( Matrix[0][0]) # prints 1
-#print( Matrix[4][0]) # prints 5
-
-
-#secretkey=input("please enter the secret key for decoding")
-
-encryptmsg=input("please enter the encryt message to decode")
-
-print("the encryptmsg:"+encryptmsg)
-
-encryptmsg=encryptmsg.upper()
-
-b=0
-while (b<len(encryptmsg)):
-    #print("\n")
-    if(ord(encryptmsg[b])>=65 and ord(encryptmsg[b])<=90):
-        print("no spaces"+encryptmsg[b])
-    b=b+1
-
-
-
-#####print("the i value :")
-#####print(i)
-#####print("the j value :")
-#####print(j)
-
-# searching for the message charaters in matrix
-# and storing values in the variable
-
-sti=0
-stj=0
-sti1=0
-stj1=0
-m=0
-while(m<len(encryptmsg)):
-    ii=0
-    js=0
-    c=0
-    while(ii<5):
-        while(js<5):
-            if(ord(Matrix[ii][js])==ord(encryptmsg[m])):
-                #print("the row and column number matched")
-                #print(Matrix[ii][js])
-                #print(encryptmsg[m])
-                #print(ii)
-                #print(js)
+    m=0
+    while(j<le):
+        c=0
+        #print("the j value")
+        if(j==0):
+            uniq=uniq+key1[0]
+        k=0
+        leng=len(uniq)
+        while(k<leng):
+            if(ord(key1[j])==ord(uniq[k])):
                 c=1
-            js=js+1
-        ii=ii+1
+            k=k+1
+        if(c==1):
+            m=1
+        else:
+            uniq=uniq+key1[j]
+        j=j+1
+    return uniq
+
+def Generate_Matrix(uniq,alpha):
+    #the unique key is in uniq variable
+    #Inserting the unique key into matrix
+    Matrix = [[0 for x in range(5)] for x in range(5)] 
+    lenn=len(uniq)
+    x=0
+    i=0
+    j=0
+    while(x<lenn):
+        Matrix[i][j]=uniq[x]
+        #print("the matrix have")
+        x=x+1
+        j=j+1
+        if(j==5):
+            i=i+1
+            j=0
+    ik=i
+    ij=j
+    y=0
     
-    m=m+1
+    uniq=uniq.upper()
+    while(y<26):
+        c=0
+        z=0
     
-def position(letter):
+        while(z<lenn):
+            if(ord(alpha[y])==ord(uniq[z])):
+                c=1
+            z=z+1
+        if(c==1):
+            m=1
+        else:
+            if(ord(alpha[y])!=74):
+                Matrix[i][j]=alpha[y]
+                #print(Matrix[i][j])
+                j=j+1
+                if(j==5):
+                    i=i+1
+                    j=0
+        y=y+1
+    #printing the matrix
+    print("The matrix is :\n")
+    for line in Matrix:
+        print(line)
+    return Matrix
+
+def Clean_message(encryptmsg):
+    #removing numbers or special character from the message 
+    msg=encryptmsg
+    msg=msg.upper()
+    message=''
+    b=0
+    while (b<len(msg)):
+        if(ord(msg[b])>=65 and ord(msg[b])<=90):
+            message=message+msg[b]
+        b=b+1
+    print("The message is :",message)
+    return message
+
+
+def Encrypt():
+    key=input("please enter the secret key : ")
+    encryptmsg=input("please enter the message to encrypt :")
+
+    #generating alphabets    
+    alpha=alphabet()
+    
+    #cleaning the key
+    uniq= Remove_dup_specialchar(key)
+    #print("The unique key is :",uniq)
+
+    #generating matix
+    Matrix=Generate_Matrix(uniq,alpha)
+
+    #cleanning the message
+    message=Clean_message(encryptmsg)
+    
+
+    
+
+    #inserting x if their is a double characters in message
+    #print("the message is :",message)
+    msg=message
+    le=len(message)
+    xmsg=''
+    j=0
+    i=0
+    c=0
+    m=0
+    while(i<le):
+        c=0
+        if(i==0):
+            xmsg=xmsg+msg[0]
+            i=i+1
+        if(i<len(msg)):
+            if(ord(xmsg[j])==ord(msg[i])):
+                xmsg=xmsg+'X'
+                xmsg=xmsg+msg[i]
+                j=j+2
+            else:
+                xmsg=xmsg+msg[i]
+                j=j+1
+        else:
+            m=0
+        i=i+1
+    #print("\nThe x inserted message is : ",xmsg)
+    #the x inserted message is in variable xmsg
+
+
+
+    encryptmsg=xmsg
+    print("The encryptedmsg",encryptmsg)
+    #encrypting the message    
+    e=0
+    dmsg=''
+    while(e<len(encryptmsg)):
+        p1,q1=position(encryptmsg[e],Matrix)
+        e=e+1
+        if(e<len(encryptmsg)):
+            p2,q2=position(encryptmsg[e],Matrix)
+        if(q1==q2):
+            if(p1==4):
+                dmsg=dmsg+Matrix[0][q1]
+            else:
+                dmsg=dmsg+Matrix[p1+1][q1]
+            if(p2==4):
+                dmsg=dmsg+Matrix[0][q2]
+            else:
+                dmsg=dmsg+Matrix[p2+1][q2]
+        elif(p1==p2):
+            if(q1==4):
+                dmsg=dmsg+Matrix[p1][0]
+            else:
+                dmsg=dmsg+Matrix[p1][q1+1]
+            if(q2==4):
+                dmsg=dmsg+Matrix[q2][0]
+            else:
+                dmsg=dmsg+Matrix[p2][q2+1]
+        else:
+            dmsg=dmsg+Matrix[p1][q2]
+            dmsg=dmsg+Matrix[p2][q1]
+        #print("the e")
+        #print(e)
+        
+        e=e+1
+    print("\nThe encrypted message is :",dmsg)
+
+
+#function to find the position of letters in matrix
+def position(letter,Matrix):
 	x=y=0
 	for i in range(5):
 		for j in range(5):
@@ -223,120 +202,73 @@ def position(letter):
 				y=j
 
 	return x,y
+	
+	
+def Decrypt():
+    #Re
+    key=input("please enter the secret key : ")
+    decryptmsg=input("please enter the Encrypted message :")
 
-e=0
-dmsg=''
-#while(e<len(encryptmsg)):
-while(e<len(encryptmsg)):
-    #print("searching the position")
-    p1,q1=position(encryptmsg[e])
-    #print(p1)
-    #print(q1)
-    #print("2nd char:")
-    e=e+1
-    if(e<len(encryptmsg)):
-        
-        p2,q2=position(encryptmsg[e])
-        #print(p2)
-        #print(q2)
-    if(q1==q2):
-        if(p1==4):
-            dmsg=dmsg+Matrix[0][q1]
+    #generating alphabets    
+    alpha=alphabet()
+    
+    #cleaning the key
+    uniq= Remove_dup_specialchar(key)
+    #print("The unique key is :",uniq)
+
+    #generating matix
+    Matrix=Generate_Matrix(uniq,alpha)
+    
+    #cleanning the message
+    dmsg=Clean_message(decryptmsg)
+    
+
+    
+    #decrypting the encrypted message
+    g=0
+    emsg=''
+    while(g<len(dmsg)):
+        p1,q1=position(dmsg[g],Matrix)
+        g=g+1
+        if(g<len(dmsg)):
+            p2,q2=position(dmsg[g],Matrix)
+        if(q1==q2):
+            if(p1==0):
+                emsg=emsg+Matrix[4][q1]
+            else:
+                emsg=emsg+Matrix[p1-1][q1]
+            if(p2==0):
+                emsg=emsg+Matrix[4][q2]
+            else:
+                emsg=emsg+Matrix[p2-1][q2]
+        elif(p1==p2):
+            if(q1==0):
+                emsg=emsg+Matrix[p1][4]
+            else:
+                emsg=emsg+Matrix[p1][q1-1]
+            if(q2==0):
+                emsg=emsg+Matrix[q2][4]
+            else:
+                emsg=emsg+Matrix[p2][q2-1]
         else:
-            dmsg=dmsg+Matrix[p1+1][q1]
-        if(p2==4):
-            dmsg=dmsg+Matrix[0][q2]
-        else:
-            dmsg=dmsg+Matrix[p2+1][q2]
-    elif(p1==p2):
-        if(q1==4):
-            dmsg=dmsg+Matrix[p1][0]
-        else:
-            dmsg=dmsg+Matrix[p1][q1+1]
-        if(q2==4):
-            dmsg=dmsg+Matrix[q2][0]
-        else:
-            dmsg=dmsg+Matrix[p2][q2+1]
+            emsg=emsg+Matrix[p1][q2]
+            emsg=emsg+Matrix[p2][q1]
+        g=g+1
+    print("The decoded message is :",emsg)    
+
+	
+#requesting user for input
+print( "Welcome to Playfair Cipher ->")
+print("Enter: 1 for encrypt, 2 for decrypt and 0 to Quit :")
+x = input()
+while(x=='1' or x=='2' or x=='0'):
+    if(x=='1'):
+        Encrypt()
+    elif(x=='2'):
+        Decrypt()
     else:
-        dmsg=dmsg+Matrix[p1][q2]
-        dmsg=dmsg+Matrix[p2][q1]
-    print("the e")
-    print(e)
-    print("the dmsg is:")
-    print(dmsg)
-    e=e+1
+        sys.exit()
+    x=input("Enter: 1 for encrypt, 2 for decrypt and 0 for quit :\n")
 
 
 
-
-#decrypting the encrypted message
-
-print("the length of dmsg is :")
-print(len(dmsg))
-g=0
-emsg=''
-while(g<len(dmsg)):
-    #print("searching the position")
-    p1,q1=position(dmsg[g])
-    #print(p1)
-    #print(q1)
-    #print("2nd char:")
-    g=g+1
-    if(g<len(dmsg)):
-        
-        p2,q2=position(dmsg[g])
-        #print(p2)
-        #print(q2)
-    if(q1==q2):
-        if(p1==0):
-            emsg=emsg+Matrix[4][q1]
-        else:
-            emsg=emsg+Matrix[p1-1][q1]
-        if(p2==0):
-            emsg=emsg+Matrix[4][q2]
-        else:
-            emsg=emsg+Matrix[p2-1][q2]
-    elif(p1==p2):
-        if(q1==0):
-            emsg=emsg+Matrix[p1][4]
-        else:
-            emsg=emsg+Matrix[p1][q1-1]
-        if(q2==0):
-            emsg=emsg+Matrix[q2][4]
-        else:
-            emsg=emsg+Matrix[p2][q2-1]
-    else:
-        emsg=emsg+Matrix[p1][q2]
-        emsg=emsg+Matrix[p2][q1]
-    print("the g")
-    print(g)
-    print("the decrypted message is is:")
-    print(emsg)
-    g=g+1
-
-emsg=''
-
-count = 0
-for line in Matrix:
-    print(count,line)
-    count += 1
-
-
-
-#print("the i is :")
-#print(Matrix[0][0])
-
-#flag =1
-#if (x == '1'):
-#print("hello")
-#elif(x=='2'):
-#print("hi")
-#else:
-#print("error")
-
-
-#fruits = ['banana', 'apple',  'mango']
-#for index in range(len(fruits)):
-    #print ('Current fruit :', fruits[index])
-
-#print ("Good bye!")
