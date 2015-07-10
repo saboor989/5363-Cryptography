@@ -151,11 +151,16 @@ def Encrypt():
         i=i+1
     #print("\nThe x inserted message is : ",xmsg)
     #the x inserted message is in variable xmsg
-
+    
+    l=len(xmsg)
+    if(l%2==1):
+        xmsg=xmsg+'X'
+        
+    print("the x inserted at end msg :",xmsg)
 
 
     encryptmsg=xmsg
-    print("The encryptedmsg",encryptmsg)
+    #print("The encryptedmsg",encryptmsg)
     #encrypting the message    
     e=0
     dmsg=''
@@ -195,6 +200,8 @@ def Encrypt():
 #function to find the position of letters in matrix
 def position(letter,Matrix):
 	x=y=0
+	if(letter=='J'):
+	    letter='I'
 	for i in range(5):
 		for j in range(5):
 			if (Matrix[i][j]==letter):
@@ -259,7 +266,7 @@ def Decrypt():
 	
 #requesting user for input
 print( "Welcome to Playfair Cipher ->")
-print("Enter: 1 for encrypt, 2 for decrypt and 0 to Quit :")
+print("Enter: 1 for encrypt, 2 for decrypt and 0 to Quit and press enter:")
 x = input()
 while(x=='1' or x=='2' or x=='0'):
     if(x=='1'):
