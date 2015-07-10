@@ -1,5 +1,4 @@
 import sys
-
 def alphabet():
     #alpha= "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     #Entering the alphabets in string.
