@@ -315,12 +315,36 @@ while(choice=='1' or choice=='2' or choice=='3'):
         print("*********************************************************")
         print("Please enter a keyword:\n=>")
         key=input()
+        
+        ## removing j from the key replacing it with i 
+        jkey=key
+        key=''
+        size=0
+        while(size<len(jkey)):
+            if(jkey[size]=='J' or jkey[size]=='j'):
+                key=key+'I'
+            else:
+                key=key+jkey[size]
+            size=size+1
+        #print("the key without j is :",key)
+        
         print("*********************************************************")
         print("Playfair Encryption Tool (P.E.T)")
         print("Written By: SABOOR AHMED SIDDIQIE")
         print("*********************************************************")
         print("Please enter a message\n=>")
         message=input()
+        # removing j from the message replacing it with i 
+        jmessage=message
+        message=''
+        size=0
+        while(size<len(jmessage)):
+            if(jmessage[size]=='J' or jmessage[size]=='j'):
+                message=message+'I'
+            else:
+                message=message+jmessage[size]
+            size=size+1
+        #print("the key without j is :",message)
         print("*********************************************************")
         #print("the length is : the key length is :",len(message),len(key))
         if(len(message)==0 or len(key)==0):
@@ -344,12 +368,35 @@ while(choice=='1' or choice=='2' or choice=='3'):
         print("*********************************************************")
         print("Please enter a keyword:\n=>")
         decryptkey=input()
+        jkey=decryptkey
+        decryptkey=''
+        size=0
+        while(size<len(jkey)):
+            if(jkey[size]=='J' or jkey[size]=='j'):
+                decryptkey=decryptkey+'I'
+            else:
+                decryptkey=decryptkey+jkey[size]
+            size=size+1
+        #print("the key without j is :",key)
+        
         print("*********************************************************")
         print("Playfair Encryption Tool (P.E.T)")
         print("Written By: SABOOR AHMED SIDDIQIE")
         print("*********************************************************")
         print("Enter the encrypted message:\n=>")
         decryptmessage=input()
+        
+        # removing j from the message replacing it with i 
+        jmessage=decryptmessage
+        decryptmessage=''
+        size=0
+        while(size<len(jmessage)):
+            if(jmessage[size]=='J' or jmessage[size]=='j'):
+                decryptmessage=decryptmessage+'I'
+            else:
+                decryptmessage=decryptmessage+jmessage[size]
+            size=size+1
+            
         print("*********************************************************")
         if(len(decryptmessage)==0 or len(decryptkey)==0):
             print("Message cannot be Null,Please enter the proper message")
