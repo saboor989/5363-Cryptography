@@ -1,3 +1,4 @@
+#key modification
 import sys
 def alphabet():
     #alpha= "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -17,7 +18,16 @@ def Remove_dup_specialchar(key):
         if(ord(key[b])>=65 and ord(key[b])<=90):
             key1=key1+key[b]
         b=b+1
-
+    
+    jreplace=key1
+    key1=''
+    v=0
+    while(v<len(jreplace)):
+        if(jreplace[v]=='J'):
+            key1=key1+'I'
+        else:
+            key1=key1+jreplace[v]
+        v=v+1
     #now key is in key1
     #removing duplicates from the key:
     le=len(key1)    
@@ -62,13 +72,13 @@ def Generate_Matrix(uniq,alpha):
     ik=i
     ij=j
     y=0
-    
     uniq=uniq.upper()
     while(y<26):
         c=0
         z=0
     
         while(z<lenn):
+            #print("the uniq[z]=",uniq[z],z,alpha[y])
             if(ord(alpha[y])==ord(uniq[z])):
                 c=1
             z=z+1
@@ -77,6 +87,7 @@ def Generate_Matrix(uniq,alpha):
         else:
             if(ord(alpha[y])!=74):
                 Matrix[i][j]=alpha[y]
+                #print(i,j,"matrix :",Matrix[i][j])
                 #print(Matrix[i][j])
                 j=j+1
                 if(j==5):
@@ -84,11 +95,13 @@ def Generate_Matrix(uniq,alpha):
                     j=0
         y=y+1
     #printing the matrix
-    print("The matrix is :\n")
+    ###
+    #print("The matrix is :\n")
     for line in Matrix:
-        print(line)
+        #print(line) 
+        m=0
     return Matrix
-
+    #####
 def Clean_message(encryptmsg):
     #removing numbers or special character from the message 
     msg=encryptmsg
@@ -155,7 +168,7 @@ def Encrypt():
     if(l%2==1):
         xmsg=xmsg+'X'
         
-    print("the x inserted at end msg :",xmsg)
+    #print("the x inserted at end msg :",xmsg)
 
 
     encryptmsg=xmsg
@@ -265,16 +278,13 @@ def Decrypt():
 	
 #requesting user for input
 print( "Welcome to Playfair Cipher ->")
-print("Enter: 1 for encrypt, 2 for decrypt and 0 to Quit and press enter:")
+print("Enter: \n1.Encrypt\n2.Decrypt \n3.Quit")
 x = input()
-while(x=='1' or x=='2' or x=='0'):
+while(x=='1' or x=='2' or x=='3'):
     if(x=='1'):
         Encrypt()
     elif(x=='2'):
         Decrypt()
     else:
         sys.exit()
-    x=input("Enter: 1 for encrypt, 2 for decrypt and 0 for quit :\n")
-
-
-
+    x=input("\nEnter: \n1.Encrypt\n2.Decrypt \n3.Quit :\n")
