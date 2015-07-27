@@ -1,0 +1,138 @@
+
+
+#SYMBOLS = """" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~""""
+
+
+#def keywordFromSeed(seed)
+#Does what I showed above.
+#def encrypt(plain_text_message,keyword)
+#Describes itself
+#def decrypt(cipher_text_message,keyword)
+#Describes itself
+#def buildVigenere()
+
+
+
+import random
+random.seed(42)
+
+def buildVigenere(symbols):
+
+    n = len(symbols)
+
+    vigenere = [[0 for i in range(n)] for i in range(n)]
+
+    #Build the vigenere matrix
+    for i in range(n):
+        temp = symbols
+        for j in range(n):
+            #r = random.randrange(len(temp))
+            #vigenere[i][j] = temp[r]
+            #temp.replace(temp[r],'')
+            nothing=0
+    i=0
+    while(i<n):
+        j=0
+        k=0
+        l=0
+        uniq=[]
+        while j<n:
+            r=random.randrange(len(temp))
+            #print("The r value generated is :",r)
+            if(j==0):
+                #uniq[l]=r
+                uniq.append(r)
+                vigenere[i][j] = temp[r]
+                temp.replace(temp[r],'')
+                l+=1
+                j+=1
+                #print("the uniq 0 is :",uniq[0])
+            if(r in uniq):
+                nothing=1
+                #print("the r value in uniq is :::",r)
+            else:
+                #uniq[l]=r
+                uniq.append(r)
+                vigenere[i][j] = temp[r]
+                temp.replace(temp[r],'')
+                #print("The uniq l+1 is :",uniq[l])
+                l+=1
+                j+=1
+            #print("The length of uniq is :",len(uniq),uniq)
+        #print(uniq)
+        print("the vigenere is :",vigenere[i])
+        i+=1
+    return vigenere
+
+symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+vigenere = buildVigenere(symbols)
+
+for line in vigenere:
+    #print(line)
+    i=0
+#print(vigenere)
+
+
+
+
+
+
+
+
+#SYMBOLS = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
+
+#print("the length of symbol is :",len(SYMBOLS))
+
+def buildVigenere(symbols):
+
+    n = len(symbols)
+
+    vigenere = [[0 for i in range(n)] for i in range(n)]
+
+    #Build the vigenere matrix
+    for i in range(n):
+        temp = symbols
+        for j in range(n):
+            #r = random.randrange(len(temp))
+            #vigenere[i][j] = temp[r]
+            #temp.replace(temp[r],'')
+            nothing=0
+    i=0
+    while(i<n):
+        j=0
+        k=0
+        l=0
+        uniq=[]
+        while j<n:
+            r=random.randrange(len(temp))
+            #print("The r value generated is :",r)
+            if(j==0):
+                #uniq[l]=r
+                uniq.append(r)
+                vigenere[i][j] = temp[r]
+                temp.replace(temp[r],'')
+                l+=1
+                j+=1
+                #print("the uniq 0 is :",uniq[0])
+            if(r in uniq):
+                nothing=1
+                #print("the r value in uniq is :::",r)
+            else:
+                #uniq[l]=r
+                uniq.append(r)
+                vigenere[i][j] = temp[r]
+                temp.replace(temp[r],'')
+                #print("The uniq l+1 is :",uniq[l])
+                l+=1
+                j+=1
+            #print("The length of uniq is :",len(uniq),uniq)
+        #print(uniq)
+        #print("the vigenere is :",vigenere[i])
+        i+=1
+    return vigenere
+
+
+
+
+

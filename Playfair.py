@@ -12,7 +12,6 @@ class StringManip:
     """
     Helper class to speed up simple string manipulation
     """
-
     def generateAlphabet(self):
         #Create empty alphabet string
         alphabet = ""

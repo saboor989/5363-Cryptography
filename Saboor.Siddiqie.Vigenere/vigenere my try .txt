@@ -1,0 +1,602 @@
+
+
+#SYMBOLS = """" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~""""
+
+
+#def keywordFromSeed(seed)
+#Does what I showed above.
+#def encrypt(plain_text_message,keyword)
+#Describes itself
+#def decrypt(cipher_text_message,keyword)
+#Describes itself
+#def buildVigenere()
+
+
+
+import random
+
+random.seed(42)
+
+
+
+
+import random
+
+#############################################################################
+# keywordFromSeed -
+#    Works by peeling off two digits at a time, and using modulo to map it into
+#    the proper range of A-Z for use as a keyword.
+# Example:
+#    This example spells math, and I chose values 0-25 on purpose, but
+#    it really doesn't matter what values we choose because 99 % 26 = 21 or 'V' 
+#    or any value % 26 for that matter.
+#
+#    seed = 12001907
+#    l1   = 12001907 % 100 = 07 = H
+#    seed = 12001907 // 100 = 120019
+#    l2   = 120019 % 100 = 19 = T
+#    seed = 120019 // 100 = 1200
+#    l3   = 1200 % 100 = 0 = A
+#    seed = 1200 // 100 = 12
+#    l4   = 12 % 100 = 12 = M
+#    seed = 12 // 100 = 0
+#
+# @param {int} seed - An integer value used to seed the random number generator
+#                     that we will use as our keyword for vigenere
+# @return {string} keyword - a string representation of the integer seed
+#############################################################################
+def keywordFromSeed(seed):
+    Letters = []
+
+    while seed > 0:
+        Letters.insert(0,chr((seed % 100) % 26 + 65))
+        seed = seed // 100
+    return ''.join(Letters)
+
+#Usage:
+
+seed = 12001907
+
+random.seed(12001907)
+
+keyWord = keywordFromSeed(seed)
+
+print(keyWord)   # Prints "MATH"
+
+
+
+
+#SYMBOLS = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
+
+print("the length of symbol is :",len(SYMBOLS))
+
+def buildVigenere(symbols):
+
+    n = len(symbols)
+
+    vigenere = [[0 for i in range(n)] for i in range(n)]
+
+    #Build the vigenere matrix
+    for i in range(n):
+        temp = symbols
+        for j in range(n):
+            #r = random.randrange(len(temp))
+            #vigenere[i][j] = temp[r]
+            #temp.replace(temp[r],'')
+            nothing=0
+    i=0
+    while(i<n):
+        j=0
+        k=0
+        l=0
+        uniq=[]
+        while j<n:
+            r=random.randrange(len(temp))
+            #print("The r value generated is :",r)
+            if(j==0):
+                #uniq[l]=r
+                uniq.append(r)
+                vigenere[i][j] = temp[r]
+                temp.replace(temp[r],'')
+                l+=1
+                j+=1
+                #print("the uniq 0 is :",uniq[0])
+            if(r in uniq):
+                nothing=1
+                #print("the r value in uniq is :::",r)
+            else:
+                #uniq[l]=r
+                uniq.append(r)
+                vigenere[i][j] = temp[r]
+                temp.replace(temp[r],'')
+                #print("The uniq l+1 is :",uniq[l])
+                l+=1
+                j+=1
+            #print("The length of uniq is :",len(uniq),uniq)
+        #print(uniq)
+        #print("the vigenere is :",vigenere[i])
+        i+=1
+    return vigenere
+
+#symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+vigenere = buildVigenere(SYMBOLS)
+
+for line in vigenere:
+    print(line)
+    i=0
+#print(vigenere)
+
+
+
+
+C:\Users\saboor>python C:\Users\saboor\Desktop\cryptography\5363-Cryptography-Sa
+boor\Saboor.Siddiqie.Vigenere\main.py -m encrypt -i C:\Users\saboor\Desktop\cryp
+tography\5363-Cryptography-Saboor\Saboor.Siddiqie.Vigenere\plainText.txt -o encr
+yptedText.txt -s 12345679
+args.type
+the seed : encrypt
+the seed : C:\Users\saboor\Desktop\cryptography\5363-Cryptography-Saboor\Saboor.
+Siddiqie.Vigenere\plainText.txt
+the seed : encryptedText.txt
+the seed : 12345679
+in the encrypt if : hello iam saboor
+the seed: 12345679
+
+
+
+
+
+C:\Users\saboor>python C:\Users\saboor\Desktop\cryptography\5363-Cryptography-Sa
+boor\Saboor.Siddiqie.Vigenere\main.py -m encrypt -i C:\Users\saboor\Desktop\cryp
+tography\5363-Cryptography-Saboor\Saboor.Siddiqie.Vigenere\plainText.txt -o C:\U
+sers\saboor\Desktop\cryptography\5363-Cryptography-Saboor\Saboor.Siddiqie.Vigene
+re\encryptedText.txt -s 123456789
+
+
+
+
+
+
+
+
+
+def buildVigenere(symbols):
+
+    n = len(symbols)
+
+    vigenere = [[0 for i in range(n)] for i in range(n)]
+
+    #Build the vigenere matrix
+    for i in range(n):
+        temp = symbols
+        for j in range(n):
+            #r = random.randrange(len(temp))
+            #vigenere[i][j] = temp[r]
+            #temp.replace(temp[r],'')
+            nothing=0
+    i=0
+    while(i<n):
+        j=0
+        k=0
+        l=0
+        uniq=[]
+        while j<n:
+            r=random.randrange(len(temp))
+            #print("The r value generated is :",r)
+            if(j==0):
+                #uniq[l]=r
+                if(i==0):
+                    uniq.append(r)
+                    vigenere[i][j] = temp[r]
+                    temp.replace(temp[r],'')
+                    l+=1
+                    j+=1
+                    #print("the uniq 0 is :",uniq[0])
+                else:
+                    k=0
+                    stat=0
+                    while k<i:
+                        if(r == vigenere[k][0]):
+                            stat=1
+                        k+=1
+                    if(stat==1):
+                        nothing=0
+                    else:                    
+                        uniq.append(r)
+                        vigenere[i][j] = temp[r]
+                        temp.replace(temp[r],'')
+                        l+=1
+                        j+=1
+                        #print("the uniq 0 is :",uniq[0])
+            if(r in uniq):
+                nothing=1
+                #print("the r value in uniq is :::",r)
+            else:
+                #uniq[l]=r
+                uniq.append(r)
+                vigenere[i][j] = temp[r]
+                temp.replace(temp[r],'')
+                #print("The uniq l+1 is :",uniq[l])
+                l+=1
+                j+=1
+            #print("The length of uniq is :",len(uniq),uniq)
+        #print(uniq)
+        print("the vigenere is :",vigenere[i])
+        i+=1
+    return vigenere
+
+
+
+
+
+#SYMBOLS = """" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~""""
+
+
+#def keywordFromSeed(seed)
+#Does what I showed above.
+#def encrypt(plain_text_message,keyword)
+#Describes itself
+#def decrypt(cipher_text_message,keyword)
+#Describes itself
+#def buildVigenere()
+
+
+
+import random
+
+symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+#symbols = """" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~""""
+
+
+
+#############################################################################
+# keywordFromSeed -
+#    Works by peeling off two digits at a time, and using modulo to map it into
+#    the proper range of A-Z for use as a keyword.
+# Example:
+#    This example spells math, and I chose values 0-25 on purpose, but
+#    it really doesn't matter what values we choose because 99 % 26 = 21 or 'V' 
+#    or any value % 26 for that matter.
+#
+#    seed = 12001907
+#    l1   = 12001907 % 100 = 07 = H
+#    seed = 12001907 // 100 = 120019
+#    l2   = 120019 % 100 = 19 = T
+#    seed = 120019 // 100 = 1200
+#    l3   = 1200 % 100 = 0 = A
+#    seed = 1200 // 100 = 12
+#    l4   = 12 % 100 = 12 = M
+#    seed = 12 // 100 = 0
+#
+# @param {int} seed - An integer value used to seed the random number generator
+#                     that we will use as our keyword for vigenere
+# @return {string} keyword - a string representation of the integer seed
+#############################################################################
+def keywordFromSeed(seed):
+    Letters = []
+    #print("the seed:",seed)
+    seed=int(seed)
+    while seed > 0:
+        Letters.insert(0,chr((seed % 100) % 26 + 65))
+        seed = seed // 100
+        #seed=str(seed)
+    return ''.join(Letters)
+
+#Usage:
+
+#seed = 12001907
+
+#random.seed(12001907)
+
+#keyWord1 = keywordFromSeed(seed)
+
+#print(keyWord1)   # Prints "MATH"
+
+
+
+
+def buildVigenere(symbols):
+
+    n = len(symbols)
+
+    vigenere = [[0 for i in range(n)] for i in range(n)]
+
+    #Build the vigenere matrix
+    for i in range(n):
+        temp = symbols
+        for j in range(n):
+            #r = random.randrange(len(temp))
+            #vigenere[i][j] = temp[r]
+            #temp.replace(temp[r],'')
+            nothing=0
+    uniqkey=[]
+    i=0
+    while(i<n):
+        j=0
+        k=0
+        l=0
+        uniq=[]
+        while j<n:
+            r=random.randrange(len(temp))
+            #print("The r value generated is :",r)
+            if(j==0):
+                if(i==0):
+                    uniq.append(r)
+                    uniqkey.append(r)
+                    vigenere[i][j] = temp[r]
+                    temp.replace(temp[r],'')
+                    j+=1
+                    #print("the uniq 0 is :",uniq[0])
+                else:
+                    if(r in uniqkey):
+                        nothing=0
+                    else:
+                        uniq.append(r)
+                        uniqkey.append(r)
+                        vigenere[i][j] = temp[r]
+                        temp.replace(temp[r],'')
+                        j+=1
+                        #print("the uniq 0 is :",uniq[0])
+            else:
+                if(r in uniq):
+                    nothing=1
+                    #print("the r value in uniq is :::",r)
+                else:                
+                    #uniq[l]=r
+                    uniq.append(r)
+                    vigenere[i][j] = temp[r]
+                    temp.replace(temp[r],'')
+                    #print("The uniq l+1 is :",uniq[l])
+                    l+=1
+                    j+=1
+            #print("The length of uniq is :",len(uniq),uniq)
+        #print(uniq)
+        #print("the vigenere is :",vigenere[i])
+        i+=1
+    return vigenere
+
+
+
+
+    
+    
+    
+
+# encrypt
+# param v : vigenere table
+# param k : key
+# param m : message
+# param ki: key index
+# param mi: message index
+def encryptionMessage(vigenere,keyword,message,ki,mi):
+    #row = ord(message[mi]) - 65
+    #col = ord(keyword[ki]) - 65
+    #row=(ord(message[mi])-65)
+    #col=(ord(keyword[ki])-65)
+    #print(row,col)
+    #print(vigenere[0][0])
+    messagesearch=0;
+    keysearchs=0
+    #print("the symbols",len(symbols))
+    for s in range(len(symbols)):
+        if(message[mi]==vigenere[0][s]):
+            messagesearch=s
+    for k in range(len(symbols)):
+        if(keyword[ki]==vigenere[k][0]):
+            keysearch=k
+    #print("the keysearch and messagesearch:",keysearch,messagesearch)
+    return vigenere[keysearch][messagesearch]            
+    #return vigenere[row][col]
+    
+
+
+# decrypt
+# param v : vigenere table
+# param k : key
+# param m : decrypt message
+# param ki: key index
+# param mi: message index
+def decryptionMessage(vigenere,keyword,message,ki,mi):
+    #row = ord(message[mi]) - 65
+    #col = ord(keyword[ki]) - 65
+    #row=(ord(message[mi])-65)
+    #col=(ord(keyword[ki])-65)
+    #print(row,col)
+    #print(vigenere[0][0])
+    decryptmessagesearch=0;
+    keysearch=0
+    #print("the n is :",len(symbols))
+    for k in range(len(symbols)):
+        if(keyword[ki]==vigenere[k][0]):
+            keysearch=k
+    for s in range(len(symbols)):
+        if(message[mi]==vigenere[keysearch][s]):
+            messagesearch=s
+    #print("the decrypt :",vigenere[0][messagesearch])
+    return vigenere[0][messagesearch]            
+    #return vigenere[row][col]
+
+    
+    
+    
+    
+    
+    
+#for line in vigenere:
+    #print(line)
+#print(vigenere)
+###
+#SYMBOLS = """" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
+#symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+#vigenere = buildVigenere(symbols)
+#print(vigenere)
+
+
+def encrypt(Message,mode,seed):
+    random.seed(seed)
+    keyword=keywordFromSeed(seed)
+    #print("The keyword is :",keyword)
+    vigenere=buildVigenere(symbols)
+    #for line in vigenere:
+        #print(line)
+        
+     
+    for line in vigenere:
+        print(line)     
+    
+    #print("The table 0th position :",vigenere[0][0])   
+    # we have 
+    #keyword
+    #message
+    #vigenere tableau
+    
+    if(mode=='encrypt'):        
+        cipherText = ""
+        
+        # encrypt
+        # param v : vigenere table
+        # param k : key
+        # param m : message
+        # param ki: key index
+        # param mi: message index
+        Message=Message.upper()
+        for i in range(len(Message)):
+            mi = i
+            ki = i % len(keyword)
+            #print(Message[i])
+            if ord(Message[i]) == 32 or ord(Message[i]) < 65 or ord(Message[i]) > 91:
+                if ord(Message[i]) == 32:
+                    cipherText = cipherText + ' '
+                else:
+                    cipherText = cipherText + ''
+                #cipherText = cipherText + ' '
+            else:
+                #print("the keyword: ,message : and ki and mi are ",keyword,Message,ki,mi)
+                cipherText = cipherText + encryptionMessage(vigenere,keyword,Message,ki,mi)
+        print(cipherText)    
+    return(cipherText)
+
+def decrypt(Message,mode,seed):
+    random.seed(seed)
+    keyword=keywordFromSeed(seed)
+    #print("The keyword is :",keyword)
+    vigenere=buildVigenere(symbols)
+    #for line in vigenere:
+        #print(line)
+        
+     
+    for line in vigenere:
+        print(line)
+        
+    #print("The table 0th position :",vigenere[0][0])   
+    # we have 
+    #keyword
+    #message
+    #vigenere tableau
+    
+    plainText = ""
+        
+    # decrypt
+    # param v : vigenere table
+    # param k : key
+    # param m : decryptmessage
+    # param ki: key index
+    # param mi: message index
+    Message=Message.upper()
+    for i in range(len(Message)):
+        mi = i
+        ki = i % len(keyword)
+        #print(Message[i])
+        if ord(Message[i]) == 32 or ord(Message[i]) < 65 or ord(Message[i]) > 91:
+            if ord(Message[i]) == 32:
+                 plainText = plainText + ' '
+            else:
+                plainText = plainText + ''
+            #plainText = plainText + ' '
+        else:
+            #print("the keyword: ,message : and ki and mi are ",keyword,Message,ki,mi)
+            plainText = plainText + decryptionMessage(vigenere,keyword,Message,ki,mi)
+    print(plainText)
+    
+    #encryptionMessage(vigenere,keyword,message,ki,mi):
+
+
+
+
+
+
+
+
+
+
+-----------------------main
+import argparse
+import sys
+import randomized_vigenere as rv
+
+
+#python3 main.py -m encrypt -seed 7487383487438734 -i plainText.txt -o encryptedText.txt
+#
+#C:\Users\saboor>python C:\Users\saboor\Desktop\cryptography\5363-Cryptography-Sa
+#boor\Saboor.Siddiqie.Vigenere\main.py -m encrypt -i plainText.txt -o encryptedTe
+#xt.txt -s 1234
+#args.type
+#the seed : encrypt
+#args.inputfile,plaintext.txt
+#C:\Users\saboor>
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-m", "--mode", dest="mode", default = "encrypt", help="Encrypt or Decrypt")
+    parser.add_argument("-i", "--inputfile", dest="inputFile", help="Input Name")
+    parser.add_argument("-o", "--outputfile", dest="outputFile", help="Output Name")
+    parser.add_argument("-s", "--seed", dest="seed",help="Integer seed")
+
+    args = parser.parse_args()
+
+    print("args.type")
+    print("the seed :",args.mode)
+    print("the seed :",args.inputFile)
+    print("the seed :",args.outputFile)
+    print("the seed :",args.seed)
+    if(args.inputFile == 'plainText.txt'):
+        print("args.inputfile,plaintext.txt")
+    else:
+        c=0
+	
+    #l=str(sys.argv)
+    #print(l)
+    
+    f = open(args.inputFile,'r')
+    message = f.read()
+    copymessage=message
+    copymessage=copymessage.upper()
+    message=''
+
+    clean=0
+    while clean < len(copymessage):
+        ordvalue=ord(copymessage[clean])
+        #print("the ordvalue is :",ordvalue)
+        if(ordvalue>64 or ordvalue==32):
+            #print("the 64 and 36 :",ordvalue)
+            if(ordvalue<91 or ordvalue==32):
+                #print("the 91 and 36 :",ordvalue)
+                message=message+copymessage[clean]
+                print("the message in if :",message,ord(copymessage[clean]))
+        clean+=1
+    print("the message is :",message)
+    
+    if(args.mode == 'encrypt'):
+        print("in the encrypt if :",message)
+        data = rv.encrypt(message,args.mode,args.seed)
+    else:
+        print("In the decrypt :")
+        data = rv.decrypt(message,args.mode,args.seed)
+    #o = open(args.outputFile,'w')
+    #o.write(str(data))
+
+
+if __name__ == '__main__':
+    main()
