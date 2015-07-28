@@ -15,7 +15,14 @@ import random
 
 #symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 #symbols = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
-symbols = """!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
+#symbols = """!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
+symbols=''
+for i in range(32,127):
+    symbols=symbols+chr(i)
+#print("the symbols are :",symbols)
+#print("the len is :",len(symbols))
+
+
 
 # AS given by professor
 
@@ -169,7 +176,7 @@ def buildVigenere1(symbols):
 # Encryption method definition
 def encryptionMessage(vigenere,keyword,message,ki,mi):
     messagesearch=0;
-    keysearchs=0
+    keysearch=0
     #searching for message character in first row
     for s in range(len(symbols)):
         if(message[mi]==vigenere[0][s]):
