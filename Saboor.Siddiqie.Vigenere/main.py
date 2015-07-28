@@ -33,7 +33,7 @@ def main():
     
         #calling the encrypt method for encrytion method present in random vigenere
         data = rv.encrypt(message,args.mode,args.seed)
-        
+
         #opening the output file in write mode for writing the output
         o=open(args.outputFile,'w')
         o.write(str(data))
@@ -48,6 +48,7 @@ def main():
         
         #calling the decrypt method for decryption        
         data = rv.decrypt(message,args.mode,args.seed)
+        
         
         #opening the file in write mode for writing the encrypted message
         o=open(args.outputFile,'w')
