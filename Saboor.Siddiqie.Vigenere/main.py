@@ -1,8 +1,8 @@
 ###############################################
-# Name: SABOOR AHMED SIDDIQIE
-# Class: CMPS 5363 Cryptography
-# Date:  July 2015
-# Program 1 - Vigenere Cipher
+# Name      : SABOOR AHMED SIDDIQIE
+# Class     : CMPS 5363 Cryptography
+# Date      : 28 July 2015
+# Program 2 : Vigenere Cipher
 ###############################################
 
 import argparse
@@ -25,12 +25,13 @@ def main():
 
     
     if(args.mode == 'encrypt'):
+        #Encryption method
         #opening a file for reading the message
         f = open(args.inputFile,'r')
         message = f.read()
         f.close()
     
-        #calling the encrypt method for encrytion present in random vigenere
+        #calling the encrypt method for encrytion method present in random vigenere
         data = rv.encrypt(message,args.mode,args.seed)
         
         #opening the output file in write mode for writing the output

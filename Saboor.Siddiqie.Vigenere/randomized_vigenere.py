@@ -1,8 +1,8 @@
 ###############################################
-# Name: SABOOR AHMED SIDDIQIE
-# Class: CMPS 5363 Cryptography
-# Date: 28 July 2015
-# Program 1 - Vigenere Cipher
+# Name      : SABOOR AHMED SIDDIQIE
+# Class     : CMPS 5363 Cryptography
+# Date      : 28 July 2015
+# Program 2 : Vigenere Cipher
 ###############################################
 
 import random
@@ -13,15 +13,11 @@ import random
 #def decrypt(cipher_text_message,keyword)
 #def buildVigenere()
 
-
-
-
-
 #symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 #symbols = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
 symbols = """!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
 
-# as given by professor
+# AS given by professor
 
 #############################################################################
 # keywordFromSeed -
@@ -63,7 +59,7 @@ def keywordFromSeed(seed):
 #print(keyWord1)   # Prints "MATH"
 
 
-## vigenere concept used from srikanth code.
+## Vigenere concept used from srikanth code.
 def buildVigenere(symbols):
     #random.seed(seed)
 
@@ -170,6 +166,7 @@ def buildVigenere1(symbols):
 # param m : message
 # param ki: key index
 # param mi: message index
+# Encryption method definition
 def encryptionMessage(vigenere,keyword,message,ki,mi):
     messagesearch=0;
     keysearchs=0
@@ -191,6 +188,7 @@ def encryptionMessage(vigenere,keyword,message,ki,mi):
 # param m : decrypt message
 # param ki: key index
 # param mi: message index
+# Decryption method for decrypting message
 def decryptionMessage(vigenere,keyword,message,ki,mi):
     decryptmessagesearch=0;
     keysearch=0
@@ -208,10 +206,13 @@ def decryptionMessage(vigenere,keyword,message,ki,mi):
     
     
 
-
+# Encrypt method for encrytion message
 def encrypt(Message,mode,seed):
+    #Setting the seed
     random.seed(seed)
+    #Generating the keyword
     keyword=keywordFromSeed(seed)
+    #Generating the vigenere tableau
     vigenere=buildVigenere(symbols)
           
     
@@ -234,6 +235,7 @@ def encrypt(Message,mode,seed):
         # param ki: key index
         # param mi: message index
         #Message=Message.upper()
+        #for loop for encrypting one character at a time.
         for i in range(len(Message)):
             mi = i
             ki = i % len(keyword)
@@ -244,13 +246,18 @@ def encrypt(Message,mode,seed):
                 #cipherText = cipherText + encryptionMessage(vigenere,keyword,Message,ki,mi)
                 #print(cipherText)
             cipherText = cipherText + encryptionMessage(vigenere,keyword,Message,ki,mi)
-        print("\nThe encrypted Message is :",cipherText)    
+        print("\nThe encrypted Message is :",cipherText) 
+    #returning the ciphertext        
     return(cipherText)
 
+    
+# Decryption method for decrypting the Encrypted message    
 def decrypt(Message,mode,seed):
+    #setting the seed
     random.seed(seed)
+    #generating the keyword
     keyword=keywordFromSeed(seed)
-    #print("The keyword is :",keyword)
+    #Building the vigenere tableau
     vigenere=buildVigenere(symbols)
     
     for line in vigenere:
@@ -283,6 +290,7 @@ def decrypt(Message,mode,seed):
             #print(plainText)
         plainText = plainText + decryptionMessage(vigenere,keyword,Message,ki,mi)
     print("\nThe Plain Text is :",plainText)
+    #returning the plaintext after decryption
     return(plainText)
     
 
