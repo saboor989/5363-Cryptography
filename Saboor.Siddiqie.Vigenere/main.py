@@ -1,17 +1,13 @@
+###############################################
+# Name: SABOOR AHMED SIDDIQIE
+# Class: CMPS 5363 Cryptography
+# Date:  July 2015
+# Program 1 - Vigenere Cipher
+###############################################
+
 import argparse
 import sys
 import randomized_vigenere as rv
-
-
-#python3 main.py -m encrypt -seed 7487383487438734 -i plainText.txt -o encryptedText.txt
-#
-#C:\Users\saboor>python C:\Users\saboor\Desktop\cryptography\5363-Cryptography-Sa
-#boor\Saboor.Siddiqie.Vigenere\main.py -m encrypt -i plainText.txt -o encryptedTe
-#xt.txt -s 1234
-#args.type
-#the seed : encrypt
-#args.inputfile,plaintext.txt
-#C:\Users\saboor>
 
 def main():
     parser = argparse.ArgumentParser()
@@ -23,45 +19,39 @@ def main():
 
     args = parser.parse_args()
 
-    print("args.type")
-    print("the seed :",args.mode)
-    print("the seed :",args.inputFile)
-    print("the seed :",args.outputFile)
-    print("the seed :",args.seed)
-    if(args.inputFile == 'plainText.txt'):
-        print("args.inputfile,plaintext.txt")
-    else:
-        c=0
-	
-    #l=str(sys.argv)
-    #print(l)
-    
-    f = open(args.inputFile,'r')
-    message = f.read()
-    #f.close()
-    
-    #o.write(str(data))
-    if(args.mode == 'encrypt'):
-        print("in the encrypt if :",message)
-        #o = open(args.outputFile,'w')
-        data = rv.encrypt(message,args.mode,args.seed)
-        #o.write(str(data))
-        #f.close()
-        #o.close()
-    else:
-        print("In the decrypt :")
-        #f = open(args.outputFile,'r')
-        #o = open(args.inputFile,'w')
-        #message = f.read()
-        print("In the decrypt message:",message)
-        data = rv.decrypt(message,args.mode,args.seed)
-        #print("the data in decrypt is :",data)
-        #o.write(str(data))
-        #f.close()
-        #o.close()
-    #o = open(args.outputFile,'w')
-    #o.write(str(data))
+    #replacing / with \ in the file path
+    address=args.outputFile    
+    matrixtext=address.replace('\\','/')
 
+    
+    if(args.mode == 'encrypt'):
+        #opening a file for reading the message
+        f = open(args.inputFile,'r')
+        message = f.read()
+        f.close()
+    
+        #calling the encrypt method for encrytion present in random vigenere
+        data = rv.encrypt(message,args.mode,args.seed)
+        
+        #opening the output file in write mode for writing the output
+        o=open(args.outputFile,'w')
+        o.write(str(data))
+        o.close()
+
+    else:
+        #Decrypt method
+        #opening the file in read mode to read the data
+        f = open(args.inputFile,'r')
+        message = f.read()
+        f.close()
+        
+        #calling the decrypt method for decryption        
+        data = rv.decrypt(message,args.mode,args.seed)
+        
+        #opening the file in write mode for writing the encrypted message
+        o=open(args.outputFile,'w')
+        o.write(str(data))
+        o.close()
 
 if __name__ == '__main__':
     main()

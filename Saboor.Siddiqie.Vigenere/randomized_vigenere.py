@@ -1,24 +1,27 @@
+###############################################
+# Name: SABOOR AHMED SIDDIQIE
+# Class: CMPS 5363 Cryptography
+# Date: 28 July 2015
+# Program 1 - Vigenere Cipher
+###############################################
 
+import random
 
-#SYMBOLS = """" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~""""
-
-
+#The file contains below method definitions
 #def keywordFromSeed(seed)
-#Does what I showed above.
 #def encrypt(plain_text_message,keyword)
-#Describes itself
 #def decrypt(cipher_text_message,keyword)
-#Describes itself
 #def buildVigenere()
 
 
 
-import random
+
 
 #symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+#symbols = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
 symbols = """!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
 
-
+# as given by professor
 
 #############################################################################
 # keywordFromSeed -
@@ -54,19 +57,54 @@ def keywordFromSeed(seed):
     return ''.join(Letters)
 
 #Usage:
-
 #seed = 12001907
-
 #random.seed(12001907)
-
 #keyWord1 = keywordFromSeed(seed)
-
 #print(keyWord1)   # Prints "MATH"
 
 
-
-
+## vigenere concept used from srikanth code.
 def buildVigenere(symbols):
+    #random.seed(seed)
+
+    n = len(symbols)
+
+    vigenere = [[0 for i in range(n)] for i in range(n)]
+    symbols = list(symbols)
+    random.shuffle(symbols)
+    symbols = ''.join(symbols)
+    #print('new symbols:')
+    #print(symbols)
+    #print(' ')
+    
+    for sym in symbols:
+        #random.seed(seed)
+        myList = []
+    
+        for i in range(n):
+            r = random.randrange(n)
+            
+            if r not in myList:
+                myList.append(r)
+            else:
+                while(r in myList):
+                    r = random.randrange(n)
+            
+                myList.append(r)
+                               
+            while(vigenere[i][r] != 0):
+                r = (r + 1) % n
+            
+            vigenere[i][r] = sym
+            
+    return vigenere
+
+
+
+# encrypt
+# param v : vigenere table
+##my random value generation conecpt developing
+def buildVigenere1(symbols):
 
     n = len(symbols)
 
@@ -125,39 +163,25 @@ def buildVigenere(symbols):
         #print("the vigenere is :",vigenere[i])
         i+=1
     return vigenere
+#------------------------------------------------------------------------------------------
 
 
-
-
-    
-    
-    
-
-# encrypt
-# param v : vigenere table
 # param k : key
 # param m : message
 # param ki: key index
 # param mi: message index
 def encryptionMessage(vigenere,keyword,message,ki,mi):
-    #row = ord(message[mi]) - 65
-    #col = ord(keyword[ki]) - 65
-    #row=(ord(message[mi])-65)
-    #col=(ord(keyword[ki])-65)
-    #print(row,col)
-    #print(vigenere[0][0])
     messagesearch=0;
     keysearchs=0
-    #print("the symbols",len(symbols))
+    #searching for message character in first row
     for s in range(len(symbols)):
         if(message[mi]==vigenere[0][s]):
             messagesearch=s
+    #searching for keyword character in first column
     for k in range(len(symbols)):
         if(keyword[ki]==vigenere[k][0]):
             keysearch=k
-    #print("the keysearch and messagesearch:",keysearch,messagesearch)
     return vigenere[keysearch][messagesearch]            
-    #return vigenere[row][col]
     
 
 
@@ -168,62 +192,41 @@ def encryptionMessage(vigenere,keyword,message,ki,mi):
 # param ki: key index
 # param mi: message index
 def decryptionMessage(vigenere,keyword,message,ki,mi):
-    #row = ord(message[mi]) - 65
-    #col = ord(keyword[ki]) - 65
-    #row=(ord(message[mi])-65)
-    #col=(ord(keyword[ki])-65)
-    #print(row,col)
-    #print(vigenere[0][0])
     decryptmessagesearch=0;
     keysearch=0
-    print("the n is :",len(symbols))
+    #searching for message character in first column
     for k in range(len(symbols)):
         if(keyword[ki]==vigenere[k][0]):
             keysearch=k
+    #searching for message character in the row which we found above
     for s in range(len(symbols)):
         if(message[mi]==vigenere[keysearch][s]):
             messagesearch=s
-    print("the decrypt :",vigenere[0][messagesearch])
     return vigenere[0][messagesearch]            
-    #return vigenere[row][col]
 
     
     
     
-    
-    
-    
-#for line in vigenere:
-    #print(line)
-#print(vigenere)
-###
-#SYMBOLS = """" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`abcdefghijklmnopqrstuvwxyz{|}~"""
-#symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-#vigenere = buildVigenere(symbols)
-#print(vigenere)
 
 
 def encrypt(Message,mode,seed):
     random.seed(seed)
     keyword=keywordFromSeed(seed)
-    #print("The keyword is :",keyword)
     vigenere=buildVigenere(symbols)
+          
+    
+    #o = open('matrix','a')
+    #print("the matrix in encrypt:",matrixtext)
+    
     #for line in vigenere:
         #print(line)
-        
-     
-    for line in vigenere:
-        print(line)     
-    
-    #print("The table 0th position :",vigenere[0][0])   
-    # we have 
-    #keyword
-    #message
-    #vigenere tableau
+        #o.write(str(line))
+        #o.write("\n")
+    #o.close()
     
     if(mode=='encrypt'):        
         cipherText = ""
-        
+     
         # encrypt
         # param v : vigenere table
         # param k : key
@@ -234,30 +237,27 @@ def encrypt(Message,mode,seed):
         for i in range(len(Message)):
             mi = i
             ki = i % len(keyword)
-            #print(Message[i])
-            if ord(Message[i]) == 32:
-                cipherText = cipherText + ' '
-            else:
+            #if ord(Message[i]) == 32:
+                #cipherText = cipherText + ' '
+            #else:
                 #print("the keyword: ,message : and ki and mi are ",keyword,Message,ki,mi)
-                cipherText = cipherText + encryptionMessage(vigenere,keyword,Message,ki,mi)
-        print(cipherText)    
+                #cipherText = cipherText + encryptionMessage(vigenere,keyword,Message,ki,mi)
+                #print(cipherText)
+            cipherText = cipherText + encryptionMessage(vigenere,keyword,Message,ki,mi)
+        print("\nThe encrypted Message is :",cipherText)    
     return(cipherText)
 
 def decrypt(Message,mode,seed):
-    print("the message in decrypt:",Message)
     random.seed(seed)
     keyword=keywordFromSeed(seed)
     #print("The keyword is :",keyword)
     vigenere=buildVigenere(symbols)
-    #for line in vigenere:
-        #print(line)
-        
-     
+    
     for line in vigenere:
-        print(line)
+        #print(line)
+        pass
         
-    #print("The table 0th position :",vigenere[0][0])   
-    # we have 
+    #we have 
     #keyword
     #message
     #vigenere tableau
@@ -271,17 +271,18 @@ def decrypt(Message,mode,seed):
     # param ki: key index
     # param mi: message index
     #Message=Message.upper()
-    print("the message in decrypt:",Message)
+
     for i in range(len(Message)):
         mi = i
         ki = i % len(keyword)
-        #print(Message[i])
-        if ord(Message[i]) == 32:
-            plainText = plainText + ' '
-        else:
-            print("the keyword: ,message : and ki and mi are ",keyword,Message,ki,mi)
-            plainText = plainText + decryptionMessage(vigenere,keyword,Message,ki,mi)
-    print(plainText)
+        #if ord(Message[i]) == 32:
+            #plainText = plainText + ' '
+        #else:
+            #print("the keyword: ,message : and ki and mi are ",keyword,Message,ki,mi)
+            #plainText = plainText + decryptionMessage(vigenere,keyword,Message,ki,mi)
+            #print(plainText)
+        plainText = plainText + decryptionMessage(vigenere,keyword,Message,ki,mi)
+    print("\nThe Plain Text is :",plainText)
     return(plainText)
     
-    #encryptionMessage(vigenere,keyword,message,ki,mi):
+
